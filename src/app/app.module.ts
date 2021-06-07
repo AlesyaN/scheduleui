@@ -1,16 +1,42 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
+import {SideBarComponent} from './side-bar/side-bar.component';
+import {GenerationFormComponent} from './generation-form/generation-form.component';
+import {GeneratorComponent} from './generator/generator.component';
+import {SortablejsModule} from 'ngx-sortablejs';
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
+import { ScheduleComponent } from './schedule/schedule.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SideBarComponent,
+    GenerationFormComponent,
+    GeneratorComponent,
+    ScheduleComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    SortablejsModule.forRoot({animation: 150}),
+    FormsModule,
+    HttpClientModule,
+    BrowserModule,
+    RouterModule.forRoot([
+      {path: '', component: GeneratorComponent},
+    ]),
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

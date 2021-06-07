@@ -1,0 +1,113 @@
+<div class="container">
+  <div>
+    <label for="name" [(ngModel)]="scheduleName" class="form-label">Название</label>
+    <input type="text" class="form-control" id="name">
+  </div>
+
+  <hr class="my-4">
+
+  <div>
+    <h4 class="mb-3">
+      Параметры
+    </h4>
+
+    <div class="form-check form-switch">
+      <input type="checkbox" class="form-check-input" id="divide-days-by-class-type">
+      <label class="form-check-label" for="divide-days-by-class-type">Разделять дни на лекционные и
+        семинарские</label>
+    </div>
+
+    <div class="form-check form-switch">
+      <input type="checkbox" class="form-check-input" id="shifts">
+      <label class="form-check-label" for="shifts">Разделять на первую и вторую смены</label>
+    </div>
+
+    <div class="form-check form-switch">
+      <input type="checkbox" class="form-check-input" id="free-day">
+      <label class="form-check-label" for="free-day">Выделять библиотечный день</label>
+    </div>
+    <br>
+
+    <label class="form-check-label">Закреплять аудитории для:</label>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="fix-auditorium-for" id="fix-auditorium-for-group">
+      <label class="form-check-label" for="fix-auditorium-for-group">Группы</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="fix-auditorium-for" id="fix-auditorium-for-subject">
+      <label class="form-check-label" for="fix-auditorium-for-subject">Предмета</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="fix-auditorium-for" id="fix-auditorium-for-teacher">
+      <label class="form-check-label" for="fix-auditorium-for-teacher">Преподавателя</label>
+    </div>
+    <br>
+    <label class="form-check-label">Алгоритм генерации:</label>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="algorithm" id="genetic-algorithm">
+      <label class="form-check-label" for="genetic-algorithm">Генетический алгоритм</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="algorithm" id="simulated-annealing-algorithm">
+      <label class="form-check-label" for="simulated-annealing-algorithm">Алгоритм имитации отжига</label>
+    </div>
+  </div>
+
+  <hr class="my-4">
+
+  <div>
+    <div class="row">
+      <div class="col-md-8">
+        <h4 class="mb-3">
+          Ограничения
+        </h4>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-outline-primary float-end">+ Добавить ограничение</button>
+      </div>
+    </div>
+
+    <ul class="list-group" [sortablejs]="items">
+      <li class="list-group-item">
+        <div class="row justify-content-between align-items-center">
+          <div class="col-md-5">Максимальное количество занятий в день:</div>
+          <div class="col-md-5 d-flex justify-content-md-start">
+            <input class="form-control w-25" type="number">
+          </div>
+          <div class="form-check form-switch col-md-2">
+            <input type="checkbox" class="form-check-input">
+            <label class="form-check-label" for="shifts">Жесткое</label>
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row justify-content-between align-items-center">
+          <div class="col-md-5">Максимальное количество занятий по одному предмету в день:</div>
+          <div class="col-md-5 d-flex justify-content-md-start">
+            <input class="form-control w-25" type="number">
+          </div>
+          <div class="form-check form-switch col-md-2">
+            <input type="checkbox" class="form-check-input">
+            <label class="form-check-label" for="shifts">Жесткое</label>
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row justify-content-between align-items-center">
+          <div class="col-md-5">Максимальное количество окон:</div>
+          <div class="col-md-5 d-flex justify-content-md-start">
+            <input class="form-control w-25" type="number">
+          </div>
+          <div class="form-check form-switch col-md-2">
+            <input type="checkbox" class="form-check-input">
+            <label class="form-check-label" for="shifts">Жесткое</label>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+
+  <br>
+  <button class="w-100 btn btn-primary" (click)="generate()" type="submit">Сгенерировать</button>
+</div>
