@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ScheduleService} from '../schedule.service';
-import {
-  AlgorithmType, GeneratorRequest,
-  Schedule
-} from '../model/schedule.model';
+import {AlgorithmType, GeneratorRequest, Schedule} from '../model/schedule.model';
 import {Router} from '@angular/router';
+import {DataService} from '../data.service';
 
 @Component({
   selector: 'app-generation-form',
@@ -23,7 +21,7 @@ export class GenerationFormComponent implements OnInit {
 
   schedule = new Schedule();
 
-  constructor(private scheduleService: ScheduleService, private router: Router) {
+  constructor(private scheduleService: ScheduleService, private router: Router, public dataService: DataService) {
   }
 
   ngOnInit(): void {
@@ -33,8 +31,7 @@ export class GenerationFormComponent implements OnInit {
   async generate() {
     const request = new GeneratorRequest(this.divideOnLectureAndPracticeDays,
       this.fixAuditoriumFor, this.isFreeDayRequired, this.divideOnShifts, this.algorithmType);
-    const schedule = await this.scheduleService.generate(request).toPromise();
-    console.log(schedule);
+    this.dataService.scheduleData = await this.scheduleService.generate(request).toPromise();
     this.router.navigate(['schedule']);
   }
 }

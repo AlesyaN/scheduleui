@@ -3,9 +3,20 @@ import {WeekDay} from '@angular/common';
 export class Schedule {
   id: number;
   name: string;
-  populationId: any;
+  populationId: string;
   fitness: number;
   schedule: ScheduleItem[];
+  scheduleParameters: ScheduleParameters;
+}
+
+export interface ScheduleParameters {
+  groups: Group[];
+  timeSlots: TimeSlot[];
+  lectureDays: WeekDay[];
+}
+
+export enum DayOfWeek {
+
 }
 
 export interface ScheduleItem {
@@ -15,7 +26,7 @@ export interface ScheduleItem {
 
 export interface Group {
   id: number;
-  number: number;
+  number: string;
   count: number;
 }
 
@@ -29,17 +40,28 @@ export interface ScheduleCell {
   timeSlot: TimeSlot;
 }
 
-export interface Class {
+export class Class {
   subject: Subject;
   teacher: Teacher;
   auditorium: Auditorium;
   classType: ClassType;
+
+  toString(): string {
+    return this.subject.name + '\n'
+      + this.classType + '\n'
+      + this.teacher.toString() + '\n'
+      + this.auditorium.roomNumber;
+  }
 }
 
-export interface TimeSlot {
+export class TimeSlot {
   number: number;
   start: string;
   end: string;
+
+  toString(): string {
+    return this.start + '-' + this.end;
+  }
 }
 
 export interface Subject {
