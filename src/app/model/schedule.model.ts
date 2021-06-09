@@ -108,6 +108,14 @@ export class GeneratorRequest {
 
 }
 
+export class NextIterationRequest {
+  populationIdList: string[];
+
+  constructor(populationIdList: string[]) {
+    this.populationIdList = populationIdList;
+  }
+}
+
 export enum FixAuditoriumFor {
   TEACHER = 'Teacher',
   GROUP = 'Group',

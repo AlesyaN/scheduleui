@@ -18,6 +18,7 @@ export class GenerationFormComponent implements OnInit {
   isFreeDayRequired = false;
   divideOnShifts = false;
   algorithmType = AlgorithmType.GENETIC;
+  debugMode = false;
 
   schedule = new Schedule();
 
@@ -28,10 +29,27 @@ export class GenerationFormComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
+  async processGeneration() {
+    if (this.debugMode) {
+      this.initGeneration();
+    } else {
+      this.generate();
+    }
+  }
+
+  // tslint:disable-next-line:typedef
   async generate() {
     const request = new GeneratorRequest(this.divideOnLectureAndPracticeDays,
       this.fixAuditoriumFor, this.isFreeDayRequired, this.divideOnShifts, this.algorithmType);
     this.dataService.scheduleData = await this.scheduleService.generate(request).toPromise();
     this.router.navigate(['schedule']);
+  }
+
+  // tslint:disable-next-line:typedef
+  async initGeneration() {
+    const request = new GeneratorRequest(this.divideOnLectureAndPracticeDays,
+      this.fixAuditoriumFor, this.isFreeDayRequired, this.divideOnShifts, this.algorithmType);
+    this.dataService.scheduleData = await this.scheduleService.initGeneration(request).toPromise();
+    this.router.navigate(['schedule-debug']);
   }
 }

@@ -13,6 +13,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
+import { ScheduleDebugComponent } from './schedule-debug/schedule-debug.component';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -20,21 +22,23 @@ import {MatTableModule} from '@angular/material/table';
     SideBarComponent,
     GenerationFormComponent,
     GeneratorComponent,
-    ScheduleComponent
+    ScheduleComponent,
+    ScheduleDebugComponent
   ],
-  imports: [
-    BrowserModule,
-    SortablejsModule.forRoot({animation: 150}),
-    FormsModule,
-    HttpClientModule,
-    BrowserModule,
-    RouterModule.forRoot([
-      {path: '', component: GeneratorComponent},
-    ]),
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatTableModule
-  ],
+    imports: [
+        BrowserModule,
+        SortablejsModule.forRoot({animation: 150}),
+        FormsModule,
+        HttpClientModule,
+        BrowserModule,
+        RouterModule.forRoot([
+            {path: '', component: GeneratorComponent},
+        ]),
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatTableModule,
+        MatButtonModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

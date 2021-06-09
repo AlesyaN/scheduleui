@@ -6,6 +6,11 @@
 
   <hr class="my-4">
 
+  <div class="form-check form-switch">
+    <input type="checkbox" [(ngModel)]="debugMode" class="form-check-input" id="debug-mode">
+    <label class="form-check-label" for="debug-mode">Пошаговый просмотр процесса генерации</label>
+  </div>
+
   <div>
     <h4 class="mb-3">
       Параметры
@@ -109,5 +114,5 @@
   </div>
 
   <br>
-  <button class="w-100 btn btn-primary" (click)="generate()" type="submit">Сгенерировать</button>
+  <button class="w-100 btn btn-primary" (click)="processGeneration()" type="submit">Сгенерировать</button>
 </div>

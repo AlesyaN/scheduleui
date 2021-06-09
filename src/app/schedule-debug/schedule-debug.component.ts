@@ -1,42 +1,43 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import {NextIterationRequest, Schedule} from '../model/schedule.model';
 import {DataService} from '../data.service';
-import {Schedule} from '../model/schedule.model';
+import {ScheduleService} from '../schedule.service';
+import {MatTable} from '@angular/material/table';
 
 export class Element {
   weekday: string;
   timeSlot: string;
 }
 
-const ELEMENT_DATA: Element[] = [];
+let ELEMENT_DATA: Element[] = [];
 
 @Component({
-  selector: 'app-schedule',
-  templateUrl: './schedule.component.html',
-  styleUrls: ['./schedule.component.css']
+  selector: 'app-schedule-debug',
+  templateUrl: './schedule-debug.component.html',
+  styleUrls: ['./schedule-debug.component.css']
 })
-export class ScheduleComponent implements OnInit {
+export class ScheduleDebugComponent implements OnInit {
+
+  @ViewChild(MatTable) table: MatTable<Element>;
 
   schedule: Schedule;
+  populationIdList: string[] = [];
 
   displayedColumns: string[];
   dataSource = ELEMENT_DATA;
-  //
-  // scheduleItems = [
-  //   { timeSlot: '08:30 - 10:10', group1: 'Информатика', group2: 'Алгебра'}
-  // ];
+  iterationNum = 1;
 
-  // columnsToDisplay = ['timeSlots', '11-001', '11-002'];
-
-
-  constructor(public dataService: DataService) {
+  constructor(public dataService: DataService, private scheduleService: ScheduleService) {
   }
 
   ngOnInit(): void {
     this.schedule = this.dataService.scheduleData[0];
     console.log(this.schedule);
+    this.populationIdList[0] = this.schedule.populationId;
+    console.log(this.populationIdList);
     this.setDisplayedColumns();
-    this.setRowsData();
     console.log(this.displayedColumns);
+    this.setRowsData();
     console.log(ELEMENT_DATA);
   }
 
@@ -46,6 +47,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   setRowsData(): void {
+    console.log('setRowsData');
     this.schedule.schedule.forEach((s) => {
       const groupNumber = s.group.number;
       s.classes.forEach((c) => {
@@ -90,5 +92,16 @@ export class ScheduleComponent implements OnInit {
     });
   }
 
+  // tslint:disable-next-line:typedef
+  async nextIteration() {
+    const scheduleData = await this.scheduleService.nextIteration(new NextIterationRequest(this.populationIdList)).toPromise();
+    this.schedule = scheduleData[0];
+    this.populationIdList = Array.of(this.schedule.populationId);
+    ELEMENT_DATA = [];
+    this.setRowsData();
+    this.dataSource = ELEMENT_DATA;
+    this.table.renderRows();
+    this.iterationNum++;
+  }
 
 }
