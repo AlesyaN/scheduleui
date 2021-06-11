@@ -1,7 +1,7 @@
 <div class="container">
   <div>
-    <label for="name" [(ngModel)]="scheduleName" class="form-label">Название</label>
-    <input type="text" class="form-control" id="name">
+    <label for="name" class="form-label">Название</label>
+    <input type="text" [(ngModel)]="scheduleName" class="form-control" id="name">
   </div>
 
   <hr class="my-4">
@@ -111,6 +111,15 @@
       </li>
     </ul>
 
+  </div>
+
+  <hr class="my-4">
+
+  <div class="form-group">
+    <label for="file">Загрузите файл с данными:  </label>
+    <input type="file"
+           id="file"
+           (change)="handleFileInput($event.target.files)">
   </div>
 
   <br>

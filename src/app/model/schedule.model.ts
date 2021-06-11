@@ -1,7 +1,8 @@
 import {WeekDay} from '@angular/common';
 
 export class Schedule {
-  id: number;
+  id: string;
+  iterationNumber: number;
   name: string;
   populationId: string;
   fitness: number;
@@ -15,7 +16,16 @@ export interface ScheduleParameters {
   lectureDays: WeekDay[];
 }
 
-export enum DayOfWeek {
+export class SaveScheduleRequest {
+  constructor(id: string, populationId: string, iterationNumber: number) {
+    this.id = id;
+    this.populationId = populationId;
+    this.iterationNumber = iterationNumber;
+  }
+
+  id: string;
+  populationId: string;
+  iterationNumber: number;
 
 }
 
@@ -84,6 +94,13 @@ export enum ClassType {
   SEMINAR = 'Практика'
 }
 
+export interface InputData {
+  auditoriums: any[];
+  groups: any[];
+  teachers: any[];
+
+}
+
 export class GeneratorRequest {
   name: string;
   divideOnLectureAndPracticeDays: boolean;
@@ -92,18 +109,23 @@ export class GeneratorRequest {
   divideOnShifts: boolean;
   semesterNumber: number;
   algorithmType: AlgorithmType;
+  inputData: InputData;
 
-  constructor(divideOnLectureAndPracticeDays: boolean,
+  constructor(name: string,
+              divideOnLectureAndPracticeDays: boolean,
               fixAuditoriumFor: FixAuditoriumFor,
               isFreeDayRequired: boolean,
               divideOnShifts: boolean,
-              algorithmType: AlgorithmType) {
+              algorithmType: AlgorithmType,
+              data: InputData) {
+    this.name = name;
     this.divideOnLectureAndPracticeDays = divideOnLectureAndPracticeDays;
     this.fixAuditoriumFor = fixAuditoriumFor;
     this.isFreeDayRequired = isFreeDayRequired;
     this.divideOnShifts = divideOnShifts;
     this.algorithmType = algorithmType;
     this.semesterNumber = 1;
+    this.inputData = data;
   }
 
 }

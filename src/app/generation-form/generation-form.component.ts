@@ -3,6 +3,7 @@ import {ScheduleService} from '../schedule.service';
 import {AlgorithmType, GeneratorRequest, Schedule} from '../model/schedule.model';
 import {Router} from '@angular/router';
 import {DataService} from '../data.service';
+import {parse} from 'yaml';
 
 @Component({
   selector: 'app-generation-form',
@@ -19,10 +20,12 @@ export class GenerationFormComponent implements OnInit {
   divideOnShifts = false;
   algorithmType = AlgorithmType.GENETIC;
   debugMode = false;
+  data;
 
   schedule = new Schedule();
 
-  constructor(private scheduleService: ScheduleService, private router: Router, public dataService: DataService) {
+  constructor(private scheduleService: ScheduleService, private router: Router,
+              public dataService: DataService) {
   }
 
   ngOnInit(): void {
@@ -39,17 +42,30 @@ export class GenerationFormComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   async generate() {
-    const request = new GeneratorRequest(this.divideOnLectureAndPracticeDays,
-      this.fixAuditoriumFor, this.isFreeDayRequired, this.divideOnShifts, this.algorithmType);
+    const request = new GeneratorRequest(this.scheduleName, this.divideOnLectureAndPracticeDays,
+      this.fixAuditoriumFor, this.isFreeDayRequired, this.divideOnShifts, this.algorithmType, this.data);
     this.dataService.scheduleData = await this.scheduleService.generate(request).toPromise();
     this.router.navigate(['schedule']);
   }
 
   // tslint:disable-next-line:typedef
   async initGeneration() {
-    const request = new GeneratorRequest(this.divideOnLectureAndPracticeDays,
-      this.fixAuditoriumFor, this.isFreeDayRequired, this.divideOnShifts, this.algorithmType);
+    const request = new GeneratorRequest(this.scheduleName, this.divideOnLectureAndPracticeDays,
+      this.fixAuditoriumFor, this.isFreeDayRequired, this.divideOnShifts, this.algorithmType, this.data);
     this.dataService.scheduleData = await this.scheduleService.initGeneration(request).toPromise();
     this.router.navigate(['schedule-debug']);
   }
+
+  // tslint:disable-next-line:typedef
+  handleFileInput(files: FileList) {
+    const fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      if (typeof fileReader.result === 'string') {
+        this.data = parse(fileReader.result);
+        console.log(this.data);
+      }
+    };
+    fileReader.readAsText(files.item(0));
+  }
+
 }

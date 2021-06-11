@@ -1,8 +1,9 @@
 import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
-import {NextIterationRequest, Schedule} from '../model/schedule.model';
+import {NextIterationRequest, SaveScheduleRequest, Schedule} from '../model/schedule.model';
 import {DataService} from '../data.service';
 import {ScheduleService} from '../schedule.service';
 import {MatTable} from '@angular/material/table';
+import {Router} from '@angular/router';
 
 export class Element {
   weekday: string;
@@ -27,7 +28,7 @@ export class ScheduleDebugComponent implements OnInit {
   dataSource = ELEMENT_DATA;
   iterationNum = 1;
 
-  constructor(public dataService: DataService, private scheduleService: ScheduleService) {
+  constructor(public dataService: DataService, private scheduleService: ScheduleService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -102,6 +103,14 @@ export class ScheduleDebugComponent implements OnInit {
     this.dataSource = ELEMENT_DATA;
     this.table.renderRows();
     this.iterationNum++;
+  }
+
+  // tslint:disable-next-line:typedef
+  async save() {
+    console.log('click ' + this.schedule.id);
+    const result = await this.scheduleService
+      .save(new SaveScheduleRequest(this.schedule.id, this.populationIdList[0], this.iterationNum)).toPromise();
+    this.router.navigate(['list']);
   }
 
 }

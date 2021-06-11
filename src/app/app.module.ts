@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
 import { ScheduleDebugComponent } from './schedule-debug/schedule-debug.component';
 import {MatButtonModule} from '@angular/material/button';
+import { ScheduleListComponent } from './schedule-list/schedule-list.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {MatButtonModule} from '@angular/material/button';
     GenerationFormComponent,
     GeneratorComponent,
     ScheduleComponent,
-    ScheduleDebugComponent
+    ScheduleDebugComponent,
+    ScheduleListComponent
   ],
     imports: [
         BrowserModule,

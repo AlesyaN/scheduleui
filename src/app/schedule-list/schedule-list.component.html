@@ -1,0 +1,25 @@
+<div class="container" style="max-width: 900px">
+  <div class="py-2 text-center">
+    <h2>Сохраненные расписания</h2>
+  </div>
+  <ul class="list-group">
+    <li *ngFor="let schedule of schedules" class="list-group-item" (click)="openSchedule(schedule.id)">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            Имя: {{ schedule.name }}
+          </div>
+          <div class="col">
+            Оптимальность: {{ schedule.fitness }}
+          </div>
+          <div class="col">
+            Количество групп: {{ schedule.scheduleParameters.groups.length }}
+          </div>
+          <div class="col">
+            Количество итераций: {{ schedule.iterationNumber }}
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

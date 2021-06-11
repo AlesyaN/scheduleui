@@ -20,19 +20,16 @@ export class ScheduleComponent implements OnInit {
 
   displayedColumns: string[];
   dataSource = ELEMENT_DATA;
-  //
-  // scheduleItems = [
-  //   { timeSlot: '08:30 - 10:10', group1: 'Информатика', group2: 'Алгебра'}
-  // ];
-
-  // columnsToDisplay = ['timeSlots', '11-001', '11-002'];
-
 
   constructor(public dataService: DataService) {
   }
 
   ngOnInit(): void {
-    this.schedule = this.dataService.scheduleData[0];
+    if (this.dataService.scheduleData[0]) {
+      this.schedule = this.dataService.scheduleData[0];
+    } else {
+      this.schedule = this.dataService.scheduleData;
+    }
     console.log(this.schedule);
     this.setDisplayedColumns();
     this.setRowsData();
