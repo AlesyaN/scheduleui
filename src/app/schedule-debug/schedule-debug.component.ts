@@ -110,7 +110,9 @@ export class ScheduleDebugComponent implements OnInit {
     console.log('click ' + this.schedule.id);
     const result = await this.scheduleService
       .save(new SaveScheduleRequest(this.schedule.id, this.populationIdList[0], this.iterationNum)).toPromise();
-    this.router.navigate(['list']);
+    this.schedule.iterationNumber = this.iterationNum;
+    this.dataService.scheduleData = this.schedule;
+    this.router.navigate(['result']);
   }
 
 }

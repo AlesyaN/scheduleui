@@ -6,6 +6,7 @@ export class Schedule {
   name: string;
   populationId: string;
   fitness: number;
+  time: number;
   schedule: ScheduleItem[];
   scheduleParameters: ScheduleParameters;
 }
@@ -14,6 +15,8 @@ export interface ScheduleParameters {
   groups: Group[];
   timeSlots: TimeSlot[];
   lectureDays: WeekDay[];
+  approach: Approach;
+  inputDataSize: InputDataSize;
 }
 
 export class SaveScheduleRequest {
@@ -98,6 +101,23 @@ export interface InputData {
   auditoriums: any[];
   groups: any[];
   teachers: any[];
+}
+
+export interface InputDataSize {
+  auditoriums: number;
+  groups: number;
+  teachers: number;
+}
+
+export class Approach {
+  divideOnLectureAndPracticeDays: boolean;
+  fixAuditoriumFor: FixAuditoriumFor;
+  isFreeDayRequired: boolean;
+  divideOnShifts: boolean;
+  algorithmType: AlgorithmType;
+}
+
+export class Constraint {
 
 }
 

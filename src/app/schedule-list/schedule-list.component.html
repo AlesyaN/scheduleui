@@ -1,25 +1,61 @@
-<div class="container" style="max-width: 900px">
+<div class="container" style="max-width: 1500px">
   <div class="py-2 text-center">
     <h2>Сохраненные расписания</h2>
   </div>
-  <ul class="list-group">
-    <li *ngFor="let schedule of schedules" class="list-group-item" (click)="openSchedule(schedule.id)">
-      <div class="container">
+  <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8" width="100%">
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Имя</th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="parameters">
+      <th mat-header-cell *matHeaderCellDef> Параметры</th>
+      <td mat-cell *matCellDef="let element">
         <div class="row">
-          <div class="col">
-            Имя: {{ schedule.name }}
-          </div>
-          <div class="col">
-            Оптимальность: {{ schedule.fitness }}
-          </div>
-          <div class="col">
-            Количество групп: {{ schedule.scheduleParameters.groups.length }}
-          </div>
-          <div class="col">
-            Количество итераций: {{ schedule.iterationNumber }}
+          <div class="list-group" *ngIf="element.parameters">
+              <p *ngIf="element.parameters.divideOnLectureAndPracticeDays">Разделять дни на леционные и семинарские: {{ element.parameters.divideOnLectureAndPracticeDays  }}</p>
+              <p *ngIf="element.parameters.fixAuditoriumFor">Закреплять аудиторию за: {{ element.parameters.fixAuditoriumFor  }}</p>
+              <p *ngIf="element.parameters.isFreeDayRequired">Библиотечный день: {{ element.parameters.isFreeDayRequired  }}</p>
+              <p *ngIf="element.parameters.divideOnShifts">Смены: {{ element.parameters.divideOnShifts  }}</p>
+              <p *ngIf="element.parameters.algorithmType">Алгоритм: {{ element.parameters.algorithmType  }}</p>
           </div>
         </div>
-      </div>
-    </li>
-  </ul>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="constraints">
+      <th mat-header-cell *matHeaderCellDef> Ограничения</th>
+      <td mat-cell *matCellDef="let element">Тут будут ограничения</td>
+    </ng-container>
+
+    <ng-container matColumnDef="input">
+      <th mat-header-cell *matHeaderCellDef> Входные данные</th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="element.inputDataSize">
+          <span>Количество групп: {{ element.inputDataSize.groups }}</span><br>
+          <span>Количество аудиторий: {{ element.inputDataSize.auditoriums }}</span><br>
+          <span>Количество преподавателей: {{ element.inputDataSize.teachers }}</span><br>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="time">
+      <th mat-header-cell *matHeaderCellDef> Время работы</th>
+      <td mat-cell *matCellDef="let element">{{element.time}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="iterationNumber">
+      <th mat-header-cell *matHeaderCellDef> Количество итераций</th>
+      <td mat-cell *matCellDef="let element">{{element.iterationNumber}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="fitness">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Оптимальность</th>
+      <td mat-cell *matCellDef="let element">{{element.fitness}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
 </div>
