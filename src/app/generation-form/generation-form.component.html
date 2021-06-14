@@ -17,45 +17,52 @@
     </h4>
 
     <div class="form-check form-switch">
-      <input type="checkbox" class="form-check-input" id="divide-days-by-class-type">
+      <input type="checkbox" class="form-check-input" id="divide-days-by-class-type" [(ngModel)]="divideOnLectureAndPracticeDays">
       <label class="form-check-label" for="divide-days-by-class-type">Разделять дни на лекционные и
         семинарские</label>
     </div>
 
     <div class="form-check form-switch">
-      <input type="checkbox" class="form-check-input" id="shifts">
+      <input type="checkbox" class="form-check-input" id="shifts" [(ngModel)]="divideOnShifts">
       <label class="form-check-label" for="shifts">Разделять на первую и вторую смены</label>
     </div>
 
     <div class="form-check form-switch">
-      <input type="checkbox" class="form-check-input" id="free-day">
+      <input type="checkbox" class="form-check-input" id="free-day" [(ngModel)]="isFreeDayRequired">
       <label class="form-check-label" for="free-day">Выделять библиотечный день</label>
     </div>
     <br>
 
-    <label class="form-check-label">Закреплять аудитории для:</label>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="fix-auditorium-for" id="fix-auditorium-for-group">
-      <label class="form-check-label" for="fix-auditorium-for-group">Группы</label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="fix-auditorium-for" id="fix-auditorium-for-subject">
-      <label class="form-check-label" for="fix-auditorium-for-subject">Предмета</label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="fix-auditorium-for" id="fix-auditorium-for-teacher">
-      <label class="form-check-label" for="fix-auditorium-for-teacher">Преподавателя</label>
-    </div>
+    <label id="example-radio-group-label">Закреплять аудитории для:</label><br>
+    <mat-radio-group
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group"
+      [(ngModel)]="fixAuditoriumFor">
+      <mat-radio-button class="example-radio-button" value="GROUP">
+        Группы
+      </mat-radio-button><br>
+      <mat-radio-button class="example-radio-button" value="SUBJECT">
+        Предмета
+      </mat-radio-button><br>
+      <mat-radio-button class="example-radio-button" value="TEACHER">
+        Преподавателя
+      </mat-radio-button>
+    </mat-radio-group>
+
     <br>
-    <label class="form-check-label">Алгоритм генерации:</label>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="algorithm" id="genetic-algorithm">
-      <label class="form-check-label" for="genetic-algorithm">Генетический алгоритм</label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="algorithm" id="simulated-annealing-algorithm">
-      <label class="form-check-label" for="simulated-annealing-algorithm">Алгоритм имитации отжига</label>
-    </div>
+    <label class="form-check-label">Алгоритм генерации:</label><br>
+    <mat-radio-group
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group"
+      [(ngModel)]="algorithmType">
+      <mat-radio-button class="example-radio-button" value="GENETIC">
+        Генетический алгоритм
+      </mat-radio-button><br>
+      <mat-radio-button class="example-radio-button" value="ANNEALING">
+        Алгоритм имитации отжига
+      </mat-radio-button>
+    </mat-radio-group>
+
   </div>
 
   <hr class="my-4">

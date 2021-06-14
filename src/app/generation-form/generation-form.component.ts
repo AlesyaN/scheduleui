@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ScheduleService} from '../schedule.service';
-import {AlgorithmType, GeneratorRequest, Schedule} from '../model/schedule.model';
+import {AlgorithmType, FixAuditoriumFor, GeneratorRequest, Schedule} from '../model/schedule.model';
 import {Router} from '@angular/router';
 import {DataService} from '../data.service';
 import {parse} from 'yaml';
@@ -15,7 +15,7 @@ export class GenerationFormComponent implements OnInit {
   items = [];
   scheduleName = '';
   divideOnLectureAndPracticeDays = false;
-  fixAuditoriumFor = null;
+  fixAuditoriumFor: FixAuditoriumFor;
   isFreeDayRequired = false;
   divideOnShifts = false;
   algorithmType = AlgorithmType.GENETIC;

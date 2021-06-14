@@ -55,10 +55,14 @@ export class ScheduleDebugComponent implements OnInit {
         const weekday = c.scheduleCell.dayOfWeek.toString();
         const timeSlot = c.scheduleCell.timeSlot;
         const timeSlotString = timeSlot.start + '-' + timeSlot.end;
-        const lessonString = c.lesson.subject.name + '\n'
-          + c.lesson.classType + '\n'
-          + c.lesson.teacher.surname + '\n'
-          + c.lesson.auditorium.roomNumber;
+        let lessonString = c.lesson.subject.name + '\n'
+          + c.lesson.classType;
+        if (c.lesson.teacher) {
+          lessonString += c.lesson.teacher.surname + '\n';
+        }
+        if (c.lesson.auditorium) {
+          lessonString += c.lesson.auditorium.roomNumber;
+        }
         const elemIndex = ELEMENT_DATA.findIndex((element) => element.weekday === weekday && element.timeSlot === timeSlotString);
         if (elemIndex > -1) {
           ELEMENT_DATA[elemIndex][groupNumber] = lessonString;

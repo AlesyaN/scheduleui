@@ -19,6 +19,7 @@ import {ScheduleListComponent} from './schedule-list/schedule-list.component';
 import {ResultComponent} from './result/result.component';
 import {NgCircleProgressModule} from 'ng-circle-progress';
 import {MatSortModule} from '@angular/material/sort';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import {MatSortModule} from '@angular/material/sort';
     BrowserAnimationsModule,
     MatTableModule,
     MatButtonModule,
+    MatRadioModule,
     NgCircleProgressModule.forRoot({
       // set defaults here
       radius: 100,
