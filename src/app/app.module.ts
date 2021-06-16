@@ -20,6 +20,8 @@ import {ResultComponent} from './result/result.component';
 import {NgCircleProgressModule} from 'ng-circle-progress';
 import {MatSortModule} from '@angular/material/sort';
 import {MatRadioModule} from '@angular/material/radio';
+import { CompareComponent } from './compare/compare.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import {MatRadioModule} from '@angular/material/radio';
     ScheduleComponent,
     ScheduleDebugComponent,
     ScheduleListComponent,
-    ResultComponent
+    ResultComponent,
+    CompareComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,7 @@ import {MatRadioModule} from '@angular/material/radio';
     MatTableModule,
     MatButtonModule,
     MatRadioModule,
+    MatCheckboxModule,
     NgCircleProgressModule.forRoot({
       // set defaults here
       radius: 100,

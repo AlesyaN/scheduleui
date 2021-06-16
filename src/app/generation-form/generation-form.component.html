@@ -1,6 +1,6 @@
 <div class="container">
   <div>
-    <label for="name" class="form-label">Название</label>
+    <label for="name" class="form-label"><b>Название</b></label>
     <input type="text" autocomplete="off" [(ngModel)]="scheduleName" class="form-control" id="name">
   </div>
 
@@ -13,11 +13,12 @@
 
   <div>
     <h4 class="mb-3">
-      Параметры
+      <b>Параметры</b>
     </h4>
 
     <div class="form-check form-switch">
-      <input type="checkbox" class="form-check-input" id="divide-days-by-class-type" [(ngModel)]="divideOnLectureAndPracticeDays">
+      <input type="checkbox" class="form-check-input" id="divide-days-by-class-type"
+             [(ngModel)]="divideOnLectureAndPracticeDays">
       <label class="form-check-label" for="divide-days-by-class-type">Разделять дни на лекционные и
         семинарские</label>
     </div>
@@ -40,15 +41,18 @@
       [(ngModel)]="fixAuditoriumFor">
       <mat-radio-button class="example-radio-button" value="GROUP">
         Группы
-      </mat-radio-button><br>
+      </mat-radio-button>
+      <br>
       <mat-radio-button class="example-radio-button" value="SUBJECT">
         Предмета
-      </mat-radio-button><br>
+      </mat-radio-button>
+      <br>
       <mat-radio-button class="example-radio-button" value="TEACHER">
         Преподавателя
       </mat-radio-button>
     </mat-radio-group>
 
+    <br>
     <br>
     <label class="form-check-label">Алгоритм генерации:</label><br>
     <mat-radio-group
@@ -57,7 +61,8 @@
       [(ngModel)]="algorithmType">
       <mat-radio-button class="example-radio-button" value="GENETIC">
         Генетический алгоритм
-      </mat-radio-button><br>
+      </mat-radio-button>
+      <br>
       <mat-radio-button class="example-radio-button" value="ANNEALING">
         Алгоритм имитации отжига
       </mat-radio-button>
@@ -71,51 +76,178 @@
     <div class="row">
       <div class="col-md-8">
         <h4 class="mb-3">
-          Ограничения
+          <b>Ограничения</b>
         </h4>
       </div>
-      <div class="col-md-4">
-        <button class="btn btn-outline-primary float-end">+ Добавить ограничение</button>
-      </div>
     </div>
-
     <ul class="list-group" [sortablejs]="items">
       <li class="list-group-item">
-        <div class="row justify-content-between align-items-center">
-          <div class="col-md-5">Максимальное количество занятий в день:</div>
-          <div class="col-md-5 d-flex justify-content-md-start">
-            <input class="form-control w-25" type="number">
+        <div class="d-flex flex-row justify-content-start">
+          <div class="form-check form-switch me-3">
+            <input type="checkbox" class="form-check-input">
+            <label class="form-check-label">Включено</label>
           </div>
-          <div class="form-check form-switch col-md-2">
+          <div class="form-check form-switch">
             <input type="checkbox" class="form-check-input">
             <label class="form-check-label" for="shifts">Жесткое</label>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="d-flex justify-content-start align-items-center">
+            <p class="me-3">Максимальное количество занятий в день:</p>
+            <input class="form-control" style="width: 60px;" type="number">
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="d-flex justify-content-start align-items-center">
+            <p class="me-3">Приоритет:</p>
+            <input class="form-control" style="width: 60px;" type="number">
           </div>
         </div>
       </li>
       <li class="list-group-item">
-        <div class="row justify-content-between align-items-center">
-          <div class="col-md-5">Максимальное количество занятий по одному предмету в день:</div>
-          <div class="col-md-5 d-flex justify-content-md-start">
-            <input class="form-control w-25" type="number">
+        <div class="d-flex flex-row justify-content-start">
+          <div class="form-check form-switch me-3">
+            <input type="checkbox" class="form-check-input">
+            <label class="form-check-label">Включено</label>
           </div>
-          <div class="form-check form-switch col-md-2">
+          <div class="form-check form-switch">
             <input type="checkbox" class="form-check-input">
             <label class="form-check-label" for="shifts">Жесткое</label>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="d-flex justify-content-start align-items-center">
+            <p class="me-3">Максимальное количество занятий по одному предмету в день:</p>
+            <input class="form-control" style="width: 60px;" type="number">
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="d-flex justify-content-start align-items-center">
+            <p class="me-3">Приоритет:</p>
+            <input class="form-control" style="width: 60px;" type="number">
           </div>
         </div>
       </li>
       <li class="list-group-item">
-        <div class="row justify-content-between align-items-center">
-          <div class="col-md-5">Максимальное количество окон:</div>
-          <div class="col-md-5 d-flex justify-content-md-start">
-            <input class="form-control w-25" type="number">
+        <div class="d-flex flex-row justify-content-start">
+          <div class="form-check form-switch me-3">
+            <input type="checkbox" class="form-check-input">
+            <label class="form-check-label">Включено</label>
           </div>
-          <div class="form-check form-switch col-md-2">
+          <div class="form-check form-switch">
             <input type="checkbox" class="form-check-input">
             <label class="form-check-label" for="shifts">Жесткое</label>
           </div>
         </div>
+        <div class="row align-items-center">
+          <div class="d-flex justify-content-start align-items-center">
+            <p class="me-3">Максимальное количество окон в день:</p>
+            <input class="form-control" style="width: 60px;" type="number">
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="d-flex justify-content-start align-items-center">
+            <p class="me-3">Приоритет:</p>
+            <input class="form-control" style="width: 60px;" type="number">
+          </div>
+        </div>
       </li>
+      <li class="list-group-item">
+        <div class="d-flex flex-row justify-content-start">
+          <div class="form-check form-switch me-3">
+            <input type="checkbox" class="form-check-input">
+            <label class="form-check-label">Включено</label>
+          </div>
+          <div class="form-check form-switch">
+            <input type="checkbox" class="form-check-input">
+            <label class="form-check-label" for="shifts">Жесткое</label>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="d-flex justify-content-start align-items-center">
+            <p class="me-3">Максимальное количество окон в неделю:</p>
+            <input class="form-control" style="width: 60px;" type="number">
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="d-flex justify-content-start align-items-center">
+            <p class="me-3">Приоритет:</p>
+            <input class="form-control" style="width: 60px;" type="number">
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="d-flex flex-row justify-content-start">
+          <div class="form-check form-switch me-3">
+            <input type="checkbox" class="form-check-input">
+            <label class="form-check-label">Включено</label>
+          </div>
+          <div class="form-check form-switch">
+            <input type="checkbox" class="form-check-input">
+            <label class="form-check-label" for="shifts">Жесткое</label>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="d-flex justify-content-start align-items-center">
+            <p class="me-3">Максимальное количество занятий подряд:</p>
+            <input class="form-control" style="width: 60px;" type="number">
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="d-flex justify-content-start align-items-center">
+            <p class="me-3">Приоритет:</p>
+            <input class="form-control" style="width: 60px;" type="number">
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="d-flex flex-row justify-content-start">
+          <div class="form-check form-switch me-3">
+            <input type="checkbox" class="form-check-input">
+            <label class="form-check-label">Включено</label>
+          </div>
+          <div class="form-check form-switch">
+            <input type="checkbox" class="form-check-input">
+            <label class="form-check-label" for="shifts">Жесткое</label>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="d-flex justify-content-start align-items-center">
+            <p class="me-3">Не должно быть единственной пары в день.</p>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="d-flex justify-content-start align-items-center">
+            <p class="me-3">Приоритет:</p>
+            <input class="form-control" style="width: 60px;" type="number">
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="d-flex flex-row justify-content-start">
+          <div class="form-check form-switch me-3">
+            <input type="checkbox" class="form-check-input">
+            <label class="form-check-label">Включено</label>
+          </div>
+          <div class="form-check form-switch">
+            <input type="checkbox" class="form-check-input">
+            <label class="form-check-label" for="shifts">Жесткое</label>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="d-flex justify-content-start align-items-center">
+            <p class="me-3">Распределять занятия равномерно.</p>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="d-flex justify-content-start align-items-center">
+            <p class="me-3">Приоритет:</p>
+            <input class="form-control" style="width: 60px;" type="number">
+          </div>
+        </div>
+      </li>
+
     </ul>
 
   </div>
@@ -123,7 +255,7 @@
   <hr class="my-4">
 
   <div class="form-group">
-    <label for="file">Загрузите файл с данными:  </label>
+    <label for="file">Загрузите файл с данными: </label>
     <input type="file"
            id="file"
            (change)="handleFileInput($event.target.files)">

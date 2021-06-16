@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {DataService} from '../data.service';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
+import {SelectionModel} from '@angular/cdk/collections';
 
 export class Element {
   name: string;
@@ -32,6 +33,7 @@ export class ScheduleListComponent implements OnInit {
 
   displayedColumns: string[];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
+  selection = new SelectionModel<Element>(true, []);
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -51,7 +53,7 @@ export class ScheduleListComponent implements OnInit {
   }
 
   setDisplayedColumns(): void {
-    this.displayedColumns = ['name', 'parameters', 'constraints', 'input', 'time', 'iterationNumber', 'fitness'];
+    this.displayedColumns = ['select', 'name', 'parameters', 'constraints', 'input', 'time', 'iterationNumber', 'fitness'];
   }
 
   setRowsData(): void {
@@ -73,6 +75,38 @@ export class ScheduleListComponent implements OnInit {
     const schedule = await this.scheduleService.getSchedule(scheduleId).toPromise();
     this.dataService.scheduleData = schedule;
     this.router.navigate(['schedule']);
+  }
+
+  // tslint:disable-next-line:typedef
+  compare() {
+    this.router.navigate(['compare']);
+  }
+
+  /** Whether the number of selected elements matches the total number of rows. */
+  // tslint:disable-next-line:typedef
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  // tslint:disable-next-line:typedef
+  masterToggle() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+
+    this.selection.select(...this.dataSource.data);
+  }
+
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?: Element): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.iterationNumber + 1}`;
   }
 
 }
